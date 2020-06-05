@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -104,6 +104,7 @@ const ProductWrapper = styled.div`
         }
       }
       .add-to-cart {
+        cursor: pointer;
         margin-left: 1rem;
         width: 35%;
         outline: none;
@@ -121,6 +122,11 @@ const ProductWrapper = styled.div`
 `;
 
 export const Product = (props) => {
+  const [qty, setQty] = useState(1);
+  const addToCartHandler = () => {
+    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
+  };
+
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector(
     (state) => state.productDetail
@@ -130,7 +136,7 @@ export const Product = (props) => {
     return () => {};
   }, [dispatch, props.match.params.id]);
   return loading ? (
-    <div>Loading...</div>
+    <div className="loader" />
   ) : error ? (
     { error }
   ) : (
@@ -167,7 +173,7 @@ export const Product = (props) => {
         {product.countInStock > 0 ? (
           <div className="product-right-cart">
             <div className="count">
-              <select>
+              <select value={qty} onChange={(e) => setQty(e.target.value)}>
                 {[...Array(product.countInStock).keys()].map((x) => (
                   <option key={x + 1} value={x + 1}>
                     {x + 1}
@@ -175,7 +181,7 @@ export const Product = (props) => {
                 ))}
               </select>
             </div>
-            <div className="add-to-cart">
+            <div className="add-to-cart" onClick={addToCartHandler}>
               <p>Add To Cart</p>
             </div>
           </div>

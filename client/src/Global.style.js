@@ -8,6 +8,5 @@ export const GlobalStyle = createGlobalStyle`
 }
 html {
     font-family: 'Roboto','Poppins', sans-serif;
-    height: 100%;
 }
 `;

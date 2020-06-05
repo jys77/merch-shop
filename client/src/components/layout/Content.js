@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { Home } from "../Home";
 import { Product } from "../Product";
+import { Cart } from "../Cart";
 
 const ContentWrapper = styled.main`
   height: 100%;
@@ -23,6 +24,7 @@ export const Content = () => {
       <Sidebar />
       <Route path="/" exact component={Home} />
       <Route path="/product/:id" component={Product} />
+      <Route path="/cart/:id?" component={Cart} />
     </ContentWrapper>
   );
 };

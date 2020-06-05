@@ -5,6 +5,7 @@ import {
   productListReducer,
   productDetailReducer,
   sidebarToggleReducer,
+  cartAddReducer,
 } from "./reducers";
 
 const initialState = {};
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   productList: productListReducer,
   productDetail: productDetailReducer,
   sidebarToggle: sidebarToggleReducer,
+  cart: cartAddReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

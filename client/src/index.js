@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import App from "./App";
 import { GlobalStyle } from "./Global.style";
 import { Store } from "./Store";
+import "./index.css";
+
 ReactDOM.render(
   <Provider store={Store}>
     <GlobalStyle />

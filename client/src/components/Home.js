@@ -101,7 +101,7 @@ export const Home = () => {
         </ul>
       </div>
       {loading ? (
-        <div>Loading...</div>
+        <div className="loader" />
       ) : error ? (
         { error }
       ) : (
