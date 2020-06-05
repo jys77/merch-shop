@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleSidebar } from "../../actions";
 const HeaderWrapper = styled.header`
@@ -77,7 +78,7 @@ export const Header = () => {
           ☰
         </div>
         <div className="logo">
-          <a href="/">Merch</a>
+          <Link to="/">Merch</Link>
         </div>
         <div className="right-section">
           <a className="account" href="/">

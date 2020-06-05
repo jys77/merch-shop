@@ -1,3 +1,5 @@
 import { productListReducer } from "./productListReducer";
 import { sidebarToggleReducer } from "./sidebarToggleReducer";
-export { productListReducer, sidebarToggleReducer };
+import { productDetailReducer } from "./productDetailReducer";
+
+export { productListReducer, sidebarToggleReducer, productDetailReducer };

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductList } from "../actions";
@@ -108,13 +109,13 @@ export const Home = () => {
           <ul className="products-list">
             {products.map((product) => (
               <li key={product._id}>
-                <a href="/">
+                <Link to={"/product/" + product._id}>
                   <div className="image">
                     <img alt={product.name} src={product.image} />
                   </div>
                   <h3 className="name">{product.name}</h3>
                   <h2 className="price">${product.price}</h2>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

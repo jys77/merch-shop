@@ -25,11 +25,30 @@ const SidebarWrapper = styled.div`
     top: 60px;
     width: 15rem;
     height: 100%;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.7s;
     transform: translateX(-15rem);
   }
   .open {
     transform: translateX(0rem);
+  }
+  .sidebar-container {
+    font-family: "Poppins", sans-serif;
+    padding: 2rem;
+    display: flex;
+    flex-flow: column;
+    .log-in-or-sign-in {
+      font-size: 1.5rem;
+      text-align: center;
+      border-bottom: 0.1rem #c0c0c0 solid;
+      margin-bottom: 2rem;
+    }
+    ul {
+      list-style: none;
+      font-size: 1.5rem;
+      li {
+        margin-bottom: 1rem;
+      }
+    }
   }
 `;
 
@@ -52,7 +71,18 @@ export const Sidebar = () => {
         className={overlayClasses.join(" ")}
         onClick={() => dispatch(toggleSidebar())}
       />
-      <div className={sidebarClasses.join(" ")}></div>
+      <div className={sidebarClasses.join(" ")}>
+        <div className="sidebar-container">
+          <div className="log-in-or-sign-in">Log in / Sign in</div>
+          <ul>
+            <li>All Product</li>
+            <li>Hats</li>
+            <li>Shirts</li>
+            <li>Hoodies</li>
+            <li>Pants</li>
+          </ul>
+        </div>
+      </div>
     </SidebarWrapper>
   );
 };

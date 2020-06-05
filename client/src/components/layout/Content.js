@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { Route } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { Home } from "../Home";
+import { Product } from "../Product";
 
 const ContentWrapper = styled.main`
   height: 100%;
@@ -19,7 +21,8 @@ export const Content = () => {
   return (
     <ContentWrapper>
       <Sidebar />
-      <Home />
+      <Route path="/" exact component={Home} />
+      <Route path="/product/:id" component={Product} />
     </ContentWrapper>
   );
 };
