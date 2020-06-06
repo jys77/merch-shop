@@ -14,3 +14,5 @@ export const PRODUCT_DETAIL_FAIL = "PRODUCT_DETAIL_FAIL";
 //Cart Constants
 export const ADD_TO_CART_SUCCESS = "ADD_TO_CART_SUCCESS";
 export const ADD_TO_CART_FAIL = "ADD_TO_CART_FAIL";
+export const CART_NUM_CHANGE = "CART_NUM_CHANGE";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";

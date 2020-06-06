@@ -2,13 +2,46 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { addToCart } from "../actions";
+import { addToCart, cartNumChange, removeFromCart } from "../actions";
 
 const CartWrapper = styled.div`
   width: 100%;
   height: 100vh;
   margin: 0 auto;
   padding: 2rem;
+  .empty {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    &-text {
+      font-size: 1.4rem;
+      text-align: center;
+    }
+    &-button {
+      cursor: pointer;
+      margin-top: 2rem;
+      font-size: 1rem;
+      background-color: rgb(28, 25, 25);
+      color: #fff;
+      height: 50px;
+      width: 30%;
+      line-height: 50px;
+      text-align: center;
+      text-decoration: none;
+      &:hover {
+        background-color: #fff;
+        font-weight: 700;
+        color: rgb(28, 25, 25);
+        border: 2px solid rgb(28, 25, 25);
+      }
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
+  }
   .your-cart {
     font-size: 1.5rem;
     font-family: "Roboto", sans-serif;
@@ -70,7 +103,7 @@ const CartWrapper = styled.div`
               margin-top: 1rem;
             }
             select {
-              width: 51px;
+              width: 50px;
               -webkit-appearance: none;
               background-color: white;
               border: 1px solid #6e7073;
@@ -78,7 +111,7 @@ const CartWrapper = styled.div`
               color: #45474c;
               cursor: default;
               outline: none;
-              padding: 8px 30px 8px 10px;
+              padding: 8px 10px;
             }
             .item-remove {
               cursor: pointer;
@@ -172,6 +205,15 @@ export const Cart = (props) => {
     : 1;
   const dispatch = useDispatch();
   const { cartItems, error } = useSelector((state) => state.cart);
+
+  const removeHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
+  const checkoutHandler = () => {
+    props.history.push("/signin?redirect=shipping");
+  };
+
   useEffect(() => {
     dispatch(addToCart(productId, qty));
   }, [dispatch, productId, qty]);
@@ -181,74 +223,100 @@ export const Cart = (props) => {
       <div className="your-cart">
         <p>YOUR CART</p>
       </div>
-      <div className="cart-container">
-        <div className="cart-left">
-          <ul className="cart-items">
-            {cartItems.map((item) => (
-              <li className="cart-item">
-                <div className="cart-product">
-                  <Link to={"/product/" + item._id} className="cart-img">
-                    <img src={item.image} alt={item.name} />
-                  </Link>
-                  <div className="item-desc">
-                    <div className="item-name">{item.name}</div>
-                    <div className="item-price">$ {item.price}</div>
-                  </div>
-                </div>
-                <div className="item-count">
-                  <select value={item.qty}>
-                    {[...Array(item.countInStock).keys()].map((x) => (
-                      <option key={x + 1} value={x + 1}>
-                        {x + 1}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="item-remove">
-                    <svg
-                      width="100"
-                      height="100"
-                      viewBox="0 0 100 100"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M0 0H100V100H0V0Z" fill="#1C1919" />
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M84 91L8.99999 16L15.364 9.63605L90.364 84.636L84 91Z"
-                        fill="white"
-                      />
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M9.00001 85L84 9.99999L90.364 16.364L15.364 91.364L9.00001 85Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+      {cartItems.length === 0 ? (
+        <div className="empty">
+          <div className="empty-text">Your shopping cart is empty.</div>
+          <Link to="/" className="empty-button">
+            Go shopping
+          </Link>
+          <div></div>
         </div>
-        <div className="cart-right">
-          <div className="cart-panel">
-            <div className="subtotal">
-              <div className="subtotal-text">Subtotal</div>
-              <div className="subtotal-num">$0</div>
+      ) : error ? (
+        { error }
+      ) : (
+        <div className="cart-container">
+          <div className="cart-left">
+            <ul className="cart-items">
+              {cartItems.map((item) => (
+                <li key={item._id} className="cart-item">
+                  <div className="cart-product">
+                    <Link to={"/product/" + item._id} className="cart-img">
+                      <img src={item.image} alt={item.name} />
+                    </Link>
+                    <div className="item-desc">
+                      <div className="item-name">{item.name}</div>
+                      <div className="item-price">$ {item.price}</div>
+                    </div>
+                  </div>
+                  <div className="item-count">
+                    <select
+                      value={item.qty}
+                      onChange={(e) =>
+                        dispatch(cartNumChange(item._id, e.target.value))
+                      }
+                    >
+                      {[...Array(item.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </select>
+                    <div
+                      className="item-remove"
+                      onClick={() => removeHandler(item._id)}
+                    >
+                      <svg
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M0 0H100V100H0V0Z" fill="#1C1919" />
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M84 91L8.99999 16L15.364 9.63605L90.364 84.636L84 91Z"
+                          fill="white"
+                        />
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M9.00001 85L84 9.99999L90.364 16.364L15.364 91.364L9.00001 85Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="cart-right">
+            <div className="cart-panel">
+              <div className="subtotal">
+                <div className="subtotal-text">Subtotal</div>
+                <div className="subtotal-num">
+                  $ {cartItems.reduce((a, b) => a + b.qty * b.price, 0)}
+                </div>
+              </div>
+              <div className="shipping">
+                <div className="shipping-text">Shipping</div>
+                <div className="shipping-num">Free</div>
+              </div>
+              <div className="total">
+                <div className="total-text">Total</div>
+                <div className="total-num">
+                  $ {cartItems.reduce((a, b) => a + b.qty * b.price, 0)}
+                </div>
+              </div>
+              <div className="checkout-button" onClick={checkoutHandler}>
+                CHECKOUT
+              </div>
             </div>
-            <div className="shipping">
-              <div className="shipping-text">Shipping</div>
-              <div className="shipping-num">Free</div>
-            </div>
-            <div className="total">
-              <div className="total-text">Total</div>
-              <div className="total-num">$0</div>
-            </div>
-            <div className="checkout-button">CHECKOUT</div>
           </div>
         </div>
-      </div>
+      )}
     </CartWrapper>
   );
 };

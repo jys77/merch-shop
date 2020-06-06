@@ -9,6 +9,12 @@ export {
   fetchProductDetail,
 } from "./productActions";
 
-export { addToCartSuccess, addToCartFail, addToCart } from "./cartActions";
+export {
+  addToCartSuccess,
+  addToCartFail,
+  addToCart,
+  cartNumChange,
+  removeFromCart,
+} from "./cartActions";
 
 export { toggleSidebar } from "./toggleSidebarAction";

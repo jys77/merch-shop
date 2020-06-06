@@ -1,10 +1,10 @@
 import { productListReducer } from "./productListReducer";
 import { sidebarToggleReducer } from "./sidebarToggleReducer";
 import { productDetailReducer } from "./productDetailReducer";
-import { cartAddReducer } from "./cartAddReducer";
+import { cartReducer } from "./cartReducer";
 export {
   productListReducer,
   sidebarToggleReducer,
   productDetailReducer,
-  cartAddReducer,
+  cartReducer,
 };
