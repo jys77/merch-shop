@@ -93,6 +93,7 @@ const ProductWrapper = styled.div`
       display: flex;
       .count {
         select {
+          width: 51px;
           -webkit-appearance: none;
           background-color: white;
           border: 1px solid #6e7073;
@@ -106,16 +107,21 @@ const ProductWrapper = styled.div`
       .add-to-cart {
         cursor: pointer;
         margin-left: 1rem;
-        width: 35%;
+        width: 40%;
         outline: none;
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 700;
         display: flex;
         justify-content: center;
         align-items: center;
         color: #fff;
-        background-color: #172480;
-        border-color: #172480;
+        background-color: rgb(28, 25, 25);
+        border-color: rgb(28, 25, 25);
+        &:hover {
+          background-color: #fff;
+          color: rgb(28, 25, 25);
+          border: 2px solid rgb(28, 25, 25);
+        }
       }
     }
   }

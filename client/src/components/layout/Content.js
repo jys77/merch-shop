@@ -7,7 +7,6 @@ import { Product } from "../Product";
 import { Cart } from "../Cart";
 
 const ContentWrapper = styled.main`
-  height: 100%;
   max-width: 1440px;
   margin: 0 auto;
   @media (min-width: 768px) {
