@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar } from "../../actions";
 
@@ -37,6 +38,8 @@ const SidebarWrapper = styled.div`
     display: flex;
     flex-flow: column;
     .log-in-or-sign-in {
+      text-decoration: none;
+      color: black;
       font-size: 1.5rem;
       text-align: center;
       border-bottom: 0.1rem #c0c0c0 solid;
@@ -73,7 +76,9 @@ export const Sidebar = () => {
       />
       <div className={sidebarClasses.join(" ")}>
         <div className="sidebar-container">
-          <div className="log-in-or-sign-in">Log in / Sign in</div>
+          <Link to="/signin" className="log-in-or-sign-in">
+            Log in / Sign in
+          </Link>
           <ul>
             <li>All Product</li>
             <li>Hats</li>
