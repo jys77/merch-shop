@@ -11,11 +11,11 @@ router.post("/signin", async (req, res) => {
   });
   if (signinUser) {
     res.send({
-      _id: signinUser.id,
+      _id: signinUser._id,
       name: signinUser.name,
       email: signinUser.email,
       isAdmin: signinUser.isAdmin,
-      token: getToken(user),
+      token: getToken(signinUser),
     });
   } else {
     res.status(401).send({ msg: "Invalid Email or Password" });

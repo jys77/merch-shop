@@ -17,4 +17,11 @@ export {
   removeFromCart,
 } from "./cartActions";
 
+export {
+  signInRequest,
+  signInSuccess,
+  signInFail,
+  signIn,
+} from "./userActions";
+
 export { toggleSidebar } from "./toggleSidebarAction";

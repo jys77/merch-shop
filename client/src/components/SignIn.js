@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
+import { useSelector, useDispatch } from "react-redux";
+import { signIn } from "../actions";
 const SignInWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -77,21 +78,49 @@ const SignInWrapper = styled.div`
   }
 `;
 
-export const SignIn = () => {
+export const SignIn = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { loading, userInfo, error } = useSelector((state) => state.signIn);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(signIn(email, password));
+  };
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push("/");
+    }
+  });
+
   return (
     <SignInWrapper>
-      <div className="signin">
+      <form onSubmit={submitHandler} className="signin">
         <div className="signin-head">Welcome back.</div>
         <div className="signin-text">Please sign in</div>
         <div className="signin-email">
-          <input type="email" placeholder="E-Mail" id="email" />
+          <input
+            type="email"
+            placeholder="E-Mail"
+            id="email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="signin-password">
-          <input type="password" placeholder="Password" id="password" />
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            email="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-        <div className="signin-button">Sign In</div>
+        <button type="submit" className="signin-button">
+          Sign In
+        </button>
         <div className="signin-tip">Don't have an account? Register</div>
-      </div>
+      </form>
     </SignInWrapper>
   );
 };

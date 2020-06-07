@@ -7,12 +7,15 @@ import {
   productDetailReducer,
   sidebarToggleReducer,
   cartReducer,
+  signInReducer,
 } from "./reducers";
 
 const cartItems = Cookie.getJSON("cartItems") || [];
+const userInfo = Cookie.getJSON("userInfo") || null;
 
 const initialState = {
   cart: { cartItems },
+  signIn: { userInfo },
 };
 
 const reducer = combineReducers({
@@ -20,6 +23,7 @@ const reducer = combineReducers({
   productDetail: productDetailReducer,
   sidebarToggle: sidebarToggleReducer,
   cart: cartReducer,
+  signIn: signInReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

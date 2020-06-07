@@ -40,7 +40,7 @@ export const fetchProductList = () => {
         dispatch(productListSuccess(product));
       })
       .catch((error) => {
-        const errorMsg = error.msg;
+        const errorMsg = error.response.data;
         dispatch(productListFail(errorMsg));
       });
   };
@@ -78,7 +78,7 @@ export const fetchProductDetail = (productId) => {
         dispatch(ProductDetailSuccess(product));
       })
       .catch((error) => {
-        const errorMsg = error.msg;
+        const errorMsg = error.response.data;
         dispatch(ProductDetailFail(errorMsg));
       });
   };

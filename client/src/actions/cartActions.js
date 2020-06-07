@@ -34,7 +34,7 @@ export const addToCart = (productId, qty) => {
         dispatch(addToCartSuccess(product, qty));
       })
       .catch((error) => {
-        const errorMsg = error.msg;
+        const errorMsg = error.response.data;
         dispatch(addToCartFail(errorMsg));
       });
     const {
@@ -63,7 +63,7 @@ export const cartNumChange = (productId, qty) => {
         dispatch(cartNumChangeSuccess(product, qty));
       })
       .catch((error) => {
-        const errorMsg = error.msg;
+        const errorMsg = error.response.data;
         dispatch(addToCartFail(errorMsg));
       });
     const {

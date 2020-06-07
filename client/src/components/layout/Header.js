@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar } from "../../actions";
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -70,6 +70,7 @@ const HeaderWrapper = styled.header`
 
 export const Header = () => {
   const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.signIn);
 
   return (
     <HeaderWrapper>
@@ -81,7 +82,11 @@ export const Header = () => {
           <Link to="/">Merch</Link>
         </div>
         <div className="right-section">
-          <Link to="/signin" className="account" href="/">
+          <Link
+            to={userInfo ? "/profile" : "signin"}
+            className="account"
+            href="/"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
               <title>My Account</title>
               <path
