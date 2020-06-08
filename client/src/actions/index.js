@@ -22,6 +22,10 @@ export {
   signInSuccess,
   signInFail,
   signIn,
+  registerRequest,
+  registerSuccess,
+  registerFail,
+  register,
 } from "./userActions";
 
 export { toggleSidebar } from "./toggleSidebarAction";

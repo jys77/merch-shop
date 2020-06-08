@@ -70,7 +70,9 @@ const HeaderWrapper = styled.header`
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.signIn);
+  const userInfo_SignIn = useSelector((state) => state.register).userInfo;
+  const userInfo_Register = useSelector((state) => state.signIn).userInfo;
+  const userInfo = userInfo_SignIn || userInfo_Register;
 
   return (
     <HeaderWrapper>
@@ -82,11 +84,7 @@ export const Header = () => {
           <Link to="/">Merch</Link>
         </div>
         <div className="right-section">
-          <Link
-            to={userInfo ? "/profile" : "signin"}
-            className="account"
-            href="/"
-          >
+          <Link to={userInfo ? "/profile" : "/signin"} className="account">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
               <title>My Account</title>
               <path

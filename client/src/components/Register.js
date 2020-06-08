@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { signIn } from "../actions";
-const SignInWrapper = styled.div`
+import { register } from "../actions";
+const RegisterInWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  .signin {
+  .register {
     border: 2px solid black;
     padding: 1rem;
     width: 400px;
-    height: 400px;
+    height: 550px;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -38,6 +38,30 @@ const SignInWrapper = styled.div`
       margin-top: 1rem;
       font-size: 1rem;
       color: grey;
+    }
+    .first-name {
+      margin-top: 2rem;
+      input {
+        height: 40px;
+        box-shadow: none;
+        -webkit-appearance: none;
+        outline: none;
+        border-radius: 0;
+        border: 1px solid black;
+        padding: 10px 16px;
+      }
+    }
+    .last-name {
+      margin-top: 2rem;
+      input {
+        height: 40px;
+        box-shadow: none;
+        -webkit-appearance: none;
+        outline: none;
+        border-radius: 0;
+        border: 1px solid black;
+        padding: 10px 16px;
+      }
     }
     &-email {
       margin-top: 2rem;
@@ -97,15 +121,18 @@ const SignInWrapper = styled.div`
   }
 `;
 
-export const SignIn = (props) => {
+export const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
   const dispatch = useDispatch();
-  const { loading, userInfo, error } = useSelector((state) => state.signIn);
+  const { loading, userInfo, error } = useSelector((state) => state.register);
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(signIn(email, password));
+    dispatch(register(fname, lname, email, password));
   };
+
   useEffect(() => {
     if (userInfo) {
       props.history.push("/");
@@ -113,14 +140,30 @@ export const SignIn = (props) => {
   }, [userInfo, props.history]);
 
   return (
-    <SignInWrapper>
-      <form onSubmit={submitHandler} className="signin">
-        <div className="signin-head">Welcome back.</div>
-        <div className="signin-text">Please sign in</div>
+    <RegisterInWrapper>
+      <form onSubmit={submitHandler} className="register">
+        <div className="register-head">Welcome to Merch.</div>
+        <div className="register-text">Register an account</div>
         <div className="msg">
           {loading ? "Loading..." : error ? `${error.msg}` : null}
         </div>
-        <div className="signin-email">
+        <div className="first-name">
+          <input
+            type="text"
+            placeholder="First Name"
+            name="fname"
+            onChange={(e) => setFname(e.target.value)}
+          />
+        </div>
+        <div className="last-name">
+          <input
+            type="text"
+            placeholder="Last Name"
+            name="lname"
+            onChange={(e) => setLname(e.target.value)}
+          />
+        </div>
+        <div className="register-email">
           <input
             type="email"
             placeholder="E-Mail"
@@ -129,7 +172,7 @@ export const SignIn = (props) => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="signin-password">
+        <div className="register-password">
           <input
             type="password"
             placeholder="Password"
@@ -138,13 +181,13 @@ export const SignIn = (props) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="signin-button">
-          Sign In
+        <button type="submit" className="register-button">
+          Register
         </button>
-        <div className="signin-tip">
-          Don't have an account? <Link to="/register">Register</Link>
+        <div className="register-tip">
+          Already have an account? <Link to="/signin">Sign in</Link>
         </div>
       </form>
-    </SignInWrapper>
+    </RegisterInWrapper>
   );
 };

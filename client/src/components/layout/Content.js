@@ -6,6 +6,7 @@ import { Home } from "../Home";
 import { Product } from "../Product";
 import { Cart } from "../Cart";
 import { SignIn } from "../SignIn";
+import { Register } from "../Register";
 
 const ContentWrapper = styled.main`
   max-width: 1440px;
@@ -26,6 +27,7 @@ export const Content = () => {
       <Route path="/product/:id" component={Product} />
       <Route path="/cart/:id?" component={Cart} />
       <Route path="/signin" component={SignIn} />
+      <Route path="/register" component={Register} />
     </ContentWrapper>
   );
 };

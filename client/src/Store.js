@@ -8,6 +8,7 @@ import {
   sidebarToggleReducer,
   cartReducer,
   signInReducer,
+  registerReducer,
 } from "./reducers";
 
 const cartItems = Cookie.getJSON("cartItems") || [];
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   sidebarToggle: sidebarToggleReducer,
   cart: cartReducer,
   signIn: signInReducer,
+  register: registerReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
