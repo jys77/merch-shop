@@ -37,8 +37,11 @@ const ProductWrapper = styled.div`
           font-size: 1rem;
         }
         &:nth-child(3) {
-          color: #8795a1;
-          font-size: 1rem;
+          a {
+            text-decoration: none;
+            color: #8795a1;
+            font-size: 1rem;
+          }
         }
       }
     }
@@ -153,7 +156,9 @@ export const Product = (props) => {
             <Link to="/">Home</Link>
           </span>
           <span> >> </span>
-          <span>{product.category}</span>
+          <span>
+            <Link to={"/category/" + product.category}>{product.category}</Link>
+          </span>
         </div>
         <div className="product-left-image">
           <img src={product.image} alt={product.name} />
@@ -162,15 +167,7 @@ export const Product = (props) => {
       <div className="product-right">
         <div className="product-right-name">{product.name}</div>
         <div className="product-right-desc">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <br />
-          <p>
-            Ut enimadminim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat.
-          </p>
+          <p>{product.desc}</p>
         </div>
         <div className="product-right-price">$ {product.price}</div>
         <div className="product-right-stock">

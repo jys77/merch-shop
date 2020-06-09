@@ -9,6 +9,7 @@ import {
   cartReducer,
   signInReducer,
   registerReducer,
+  categoryReducer,
 } from "./reducers";
 
 const cartItems = Cookie.getJSON("cartItems") || [];
@@ -26,6 +27,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   signIn: signInReducer,
   register: registerReducer,
+  categories: categoryReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

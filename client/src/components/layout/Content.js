@@ -24,6 +24,7 @@ export const Content = () => {
     <ContentWrapper>
       <Sidebar />
       <Route path="/" exact component={Home} />
+      <Route path="/category/:category" component={Home} />
       <Route path="/product/:id" component={Product} />
       <Route path="/cart/:id?" component={Cart} />
       <Route path="/signin" component={SignIn} />

@@ -46,8 +46,10 @@ export const signIn = (email, password) => {
         Cookie.set("userInfo", JSON.stringify(data));
       })
       .catch((error) => {
-        const errorMsg = error.response.data;
-        dispatch(signInFail(errorMsg));
+        if (error.response) {
+          const { data } = error.response;
+          dispatch(signInFail(data));
+        }
       });
   };
 };
@@ -87,8 +89,10 @@ export const register = (fname, lname, email, password) => {
         Cookie.set("userInfo", JSON.stringify(data));
       })
       .catch((error) => {
-        const errorMsg = error.response.data;
-        dispatch(registerFail(errorMsg));
+        if (error.response) {
+          const { data } = error.response;
+          dispatch(registerFail(data));
+        }
       });
   };
 };

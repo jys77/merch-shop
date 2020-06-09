@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProductList } from "../actions";
+import { fetchProductList, fetchCategories } from "../actions";
 const HomeWrapper = styled.main`
   display: flex;
   .sidebar {
@@ -25,6 +25,14 @@ const HomeWrapper = styled.main`
           font-weight: 700;
           color: #606f7b;
           margin-bottom: 2rem;
+        }
+        a {
+          text-decoration: none;
+          color: black;
+          &.active,
+          &:active {
+            font-weight: 700;
+          }
         }
       }
     }
@@ -79,25 +87,46 @@ const HomeWrapper = styled.main`
   }
 `;
 
-export const Home = () => {
+export const Home = (props) => {
   // const [products, setProducts] = useState([]);
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
+  const { categories, error: catError } = useSelector(
+    (state) => state.categories
+  );
+  const category = props.match.params.category
+    ? props.match.params.category
+    : "";
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProductList());
-  }, [dispatch]);
+    dispatch(fetchProductList(category));
+  }, [dispatch, category]);
+
+  const dispatchCategories = useDispatch();
+  useEffect(() => {
+    dispatchCategories(fetchCategories());
+  }, [dispatchCategories]);
 
   return (
     <HomeWrapper>
       <div className="sidebar">
         <ul className="sidebar-list">
           <li>Filter by Products</li>
-          <li>All Products</li>
-          <li>Hat</li>
-          <li>Shirts</li>
-          <li>Hoodies</li>
-          <li>Pants</li>
+          <li>
+            <NavLink exact to="/">
+              All Products
+            </NavLink>
+          </li>
+          {catError
+            ? null
+            : categories
+            ? categories.map((cat) => (
+                <li key={cat}>
+                  <NavLink to={"/category/" + cat}>{cat}</NavLink>
+                </li>
+              ))
+            : null}
         </ul>
       </div>
       {loading ? (

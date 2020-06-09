@@ -6,7 +6,6 @@ import { addToCart, cartNumChange, removeFromCart } from "../actions";
 
 const CartWrapper = styled.div`
   width: 100%;
-  height: 100vh;
   margin: 0 auto;
   padding: 2rem;
   .empty {
@@ -132,6 +131,7 @@ const CartWrapper = styled.div`
     .cart-right {
       margin-top: 2rem;
       width: 40%;
+      height: 320px;
       border: 1px solid #dae1e7;
       padding: 2rem;
       @media (max-width: 767px) {

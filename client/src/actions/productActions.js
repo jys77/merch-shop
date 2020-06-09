@@ -7,6 +7,8 @@ import {
   PRODUCT_DETAIL_REQUEST,
   PRODUCT_DETAIL_SUCCESS,
   PRODUCT_DETAIL_FAIL,
+  CATEGORIES_SUCCESS,
+  CATEGORIES_FAIL,
 } from "../constants";
 
 //Product List
@@ -30,18 +32,20 @@ export const productListFail = (error) => {
   };
 };
 
-export const fetchProductList = () => {
+export const fetchProductList = (category = "") => {
   return (dispatch) => {
     dispatch(productListRequest);
     axios
-      .get("/api/products")
+      .get("/api/products?category=" + category)
       .then((res) => {
         const product = res.data;
         dispatch(productListSuccess(product));
       })
       .catch((error) => {
-        const errorMsg = error.response.data;
-        dispatch(productListFail(errorMsg));
+        if (error.response) {
+          const { data } = error.response;
+          dispatch(productListFail(data));
+        }
       });
   };
 };
@@ -78,8 +82,33 @@ export const fetchProductDetail = (productId) => {
         dispatch(ProductDetailSuccess(product));
       })
       .catch((error) => {
-        const errorMsg = error.response.data;
-        dispatch(ProductDetailFail(errorMsg));
+        if (error.response) {
+          const { data } = error.response;
+          dispatch(ProductDetailFail(data));
+        }
+      });
+  };
+};
+
+export const fetchCategories = () => {
+  return (dispatch) => {
+    axios
+      .get("/api/products/all/category")
+      .then((res) => {
+        const categories = res.data;
+        dispatch({
+          type: CATEGORIES_SUCCESS,
+          payload: categories,
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          const { data } = error.response;
+          dispatch({
+            type: CATEGORIES_FAIL,
+            payload: data,
+          });
+        }
       });
   };
 };

@@ -7,6 +7,7 @@ export {
   ProductDetailSuccess,
   ProductDetailFail,
   fetchProductDetail,
+  fetchCategories,
 } from "./productActions";
 
 export {

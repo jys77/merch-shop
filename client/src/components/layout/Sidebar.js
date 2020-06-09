@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSidebar } from "../../actions";
+import { toggleSidebar, fetchCategories } from "../../actions";
 
 const SidebarWrapper = styled.div`
   .sidebar-overlay {
@@ -50,6 +50,14 @@ const SidebarWrapper = styled.div`
       font-size: 1.5rem;
       li {
         margin-bottom: 1rem;
+        a {
+          text-decoration: none;
+          color: black;
+          &:active,
+          &.active {
+            font-weight: 700;
+          }
+        }
       }
     }
   }
@@ -57,6 +65,7 @@ const SidebarWrapper = styled.div`
 
 export const Sidebar = () => {
   const { show } = useSelector((state) => state.sidebarToggle);
+  const { categories, error } = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   let sidebarClasses = ["sidebar-menu"];
   let overlayClasses = [""];
@@ -68,6 +77,12 @@ export const Sidebar = () => {
     sidebarClasses = ["sidebar-menu"];
   }
 
+  const dispatchCategories = useDispatch();
+
+  useEffect(() => {
+    dispatchCategories(fetchCategories());
+  }, [dispatchCategories]);
+
   return (
     <SidebarWrapper>
       <div
@@ -76,15 +91,28 @@ export const Sidebar = () => {
       />
       <div className={sidebarClasses.join(" ")}>
         <div className="sidebar-container">
-          <Link to="/signin" className="log-in-or-sign-in">
+          <Link
+            to="/signin"
+            className="log-in-or-sign-in"
+            onClick={() => dispatch(toggleSidebar())}
+          >
             Log in / Sign in
           </Link>
           <ul>
-            <li>All Product</li>
-            <li>Hats</li>
-            <li>Shirts</li>
-            <li>Hoodies</li>
-            <li>Pants</li>
+            <li>
+              <NavLink exact to="/" onClick={() => dispatch(toggleSidebar())}>
+                All Product
+              </NavLink>
+            </li>
+            {error
+              ? null
+              : categories
+              ? categories.map((cat) => (
+                  <li key={cat} onClick={() => dispatch(toggleSidebar())}>
+                    <NavLink to={"/category/" + cat}>{cat}</NavLink>
+                  </li>
+                ))
+              : null}
           </ul>
         </div>
       </div>

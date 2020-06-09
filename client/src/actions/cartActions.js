@@ -34,8 +34,10 @@ export const addToCart = (productId, qty) => {
         dispatch(addToCartSuccess(product, qty));
       })
       .catch((error) => {
-        const errorMsg = error.response.data;
-        dispatch(addToCartFail(errorMsg));
+        if (error.response) {
+          const { data } = error.response;
+          dispatch(addToCartFail(data));
+        }
       });
     const {
       cart: { cartItems },
@@ -63,8 +65,10 @@ export const cartNumChange = (productId, qty) => {
         dispatch(cartNumChangeSuccess(product, qty));
       })
       .catch((error) => {
-        const errorMsg = error.response.data;
-        dispatch(addToCartFail(errorMsg));
+        if (error.response) {
+          const { data } = error.response;
+          dispatch(addToCartFail(data));
+        }
       });
     const {
       cart: { cartItems },
