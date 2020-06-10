@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveShipping } from "../actions";
 
 const ShippingWrapper = styled.div`
@@ -213,6 +213,8 @@ export const Shipping = (props) => {
     addressOpt ? `${addressOpt}, ` : ""
   }${city}, ${province}, ${postal}, ${country}`;
 
+  const { cartItems } = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
@@ -307,7 +309,7 @@ export const Shipping = (props) => {
         <div className="shipping-right">
           <div className="shipping-left-info">
             <div>Subtotal</div>
-            <div>$100</div>
+            <div>$ {cartItems.reduce((a, b) => a + b.qty * b.price, 0)}</div>
           </div>
           <div className="shipping-left-info">
             <div>Shipping</div>
@@ -315,7 +317,7 @@ export const Shipping = (props) => {
           </div>
           <div className="shipping-left-total">
             <div>Total</div>
-            <div>$100</div>
+            <div>$ {cartItems.reduce((a, b) => a + b.qty * b.price, 0)}</div>
           </div>
         </div>
       </div>
