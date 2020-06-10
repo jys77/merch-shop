@@ -128,6 +128,9 @@ export const Register = (props) => {
   const [lname, setLname] = useState("");
   const dispatch = useDispatch();
   const { loading, userInfo, error } = useSelector((state) => state.register);
+  const redirect = props.location.search
+    ? props.location.search.split("=")[1]
+    : "/";
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(register(fname, lname, email, password));
@@ -135,9 +138,9 @@ export const Register = (props) => {
 
   useEffect(() => {
     if (userInfo) {
-      props.history.push("/");
+      props.history.push(redirect);
     }
-  }, [userInfo, props.history]);
+  }, [userInfo, props.history, redirect]);
 
   return (
     <RegisterInWrapper>
@@ -153,6 +156,7 @@ export const Register = (props) => {
             placeholder="First Name"
             name="fname"
             onChange={(e) => setFname(e.target.value)}
+            required
           />
         </div>
         <div className="last-name">
@@ -161,6 +165,7 @@ export const Register = (props) => {
             placeholder="Last Name"
             name="lname"
             onChange={(e) => setLname(e.target.value)}
+            required
           />
         </div>
         <div className="register-email">
@@ -170,6 +175,7 @@ export const Register = (props) => {
             id="email"
             name="email"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
         <div className="register-password">
@@ -179,13 +185,19 @@ export const Register = (props) => {
             id="password"
             email="password"
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         <button type="submit" className="register-button">
           Register
         </button>
         <div className="register-tip">
-          Already have an account? <Link to="/signin">Sign in</Link>
+          Already have an account?{" "}
+          <Link
+            to={redirect === "/" ? "/signin" : "/signin?redirect=" + redirect}
+          >
+            Sign in
+          </Link>
         </div>
       </form>
     </RegisterInWrapper>

@@ -6,6 +6,7 @@ import {
   ADD_TO_CART_FAIL,
   CART_NUM_CHANGE,
   REMOVE_FROM_CART,
+  SAVE_SHIPPING,
 } from "../constants";
 
 export const addToCartSuccess = (product, qty) => {
@@ -87,5 +88,14 @@ export const removeFromCart = (productId) => {
       cart: { cartItems },
     } = getState();
     Cookie.set("cartItems", JSON.stringify(cartItems));
+  };
+};
+
+export const saveShipping = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: SAVE_SHIPPING,
+      payload: data,
+    });
   };
 };

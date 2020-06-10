@@ -102,15 +102,18 @@ export const SignIn = (props) => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { loading, userInfo, error } = useSelector((state) => state.signIn);
+  const redirect = props.location.search
+    ? props.location.search.split("=")[1]
+    : "/";
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(signIn(email, password));
   };
   useEffect(() => {
     if (userInfo) {
-      props.history.push("/");
+      props.history.push(redirect);
     }
-  }, [userInfo, props.history]);
+  }, [userInfo, props.history, redirect]);
 
   return (
     <SignInWrapper>
@@ -127,6 +130,7 @@ export const SignIn = (props) => {
             id="email"
             name="email"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
         <div className="signin-password">
@@ -136,13 +140,21 @@ export const SignIn = (props) => {
             id="password"
             email="password"
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         <button type="submit" className="signin-button">
           Sign In
         </button>
         <div className="signin-tip">
-          Don't have an account? <Link to="/register">Register</Link>
+          Don't have an account?{" "}
+          <Link
+            to={
+              redirect === "/" ? "/register" : "/register?redirect=" + redirect
+            }
+          >
+            Register
+          </Link>
         </div>
       </form>
     </SignInWrapper>

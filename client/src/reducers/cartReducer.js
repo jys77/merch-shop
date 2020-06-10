@@ -3,11 +3,13 @@ import {
   ADD_TO_CART_FAIL,
   CART_NUM_CHANGE,
   REMOVE_FROM_CART,
+  SAVE_SHIPPING,
 } from "../constants";
 
 const initialState = {
   cartItems: [],
   error: "",
+  shipping: {},
 };
 
 export const cartReducer = (state = initialState, action) => {
@@ -59,6 +61,12 @@ export const cartReducer = (state = initialState, action) => {
         ...state,
         cartItems: updatedCartItems,
       };
+    case SAVE_SHIPPING:
+      return {
+        ...state,
+        shipping: action.payload,
+      };
+
     default:
       return state;
   }
