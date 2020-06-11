@@ -215,6 +215,10 @@ export const Shipping = (props) => {
 
   const { cartItems } = useSelector((state) => state.cart);
 
+  const itemsPrice = cartItems.reduce((a, b) => a + b.qty * b.price, 0);
+  const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  const totalPrice = itemsPrice + shippingPrice;
+
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
@@ -309,15 +313,15 @@ export const Shipping = (props) => {
         <div className="shipping-right">
           <div className="shipping-left-info">
             <div>Subtotal</div>
-            <div>$ {cartItems.reduce((a, b) => a + b.qty * b.price, 0)}</div>
+            <div>$ {itemsPrice}</div>
           </div>
           <div className="shipping-left-info">
             <div>Shipping</div>
-            <div>Free</div>
+            <div>$ {shippingPrice}</div>
           </div>
           <div className="shipping-left-total">
             <div>Total</div>
-            <div>$ {cartItems.reduce((a, b) => a + b.qty * b.price, 0)}</div>
+            <div>$ {totalPrice}</div>
           </div>
         </div>
       </div>

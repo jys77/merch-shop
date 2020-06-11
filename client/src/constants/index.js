@@ -29,3 +29,8 @@ export const SIGN_IN_FAIL = "SIGN_IN_FAIL;";
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
+
+//Order Constants
+export const ORDER_REQUEST = "ORDER_REQUEST";
+export const ORDER_SUCCESS = "ORDER_SUCCESS";
+export const ORDER_FAIL = "ORDER_FAIL";

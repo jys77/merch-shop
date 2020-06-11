@@ -206,6 +206,10 @@ export const Cart = (props) => {
   const dispatch = useDispatch();
   const { cartItems, error } = useSelector((state) => state.cart);
 
+  const itemsPrice = cartItems.reduce((a, b) => a + b.qty * b.price, 0);
+  const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  const totalPrice = itemsPrice + shippingPrice;
+
   const removeHandler = (id) => {
     dispatch(removeFromCart(id));
   };
@@ -296,19 +300,15 @@ export const Cart = (props) => {
             <div className="cart-panel">
               <div className="subtotal">
                 <div className="subtotal-text">Subtotal</div>
-                <div className="subtotal-num">
-                  $ {cartItems.reduce((a, b) => a + b.qty * b.price, 0)}
-                </div>
+                <div className="subtotal-num">$ {itemsPrice}</div>
               </div>
               <div className="shipping">
                 <div className="shipping-text">Shipping</div>
-                <div className="shipping-num">Free</div>
+                <div className="shipping-num">${shippingPrice}</div>
               </div>
               <div className="total">
                 <div className="total-text">Total</div>
-                <div className="total-num">
-                  $ {cartItems.reduce((a, b) => a + b.qty * b.price, 0)}
-                </div>
+                <div className="total-num">$ {totalPrice}</div>
               </div>
               <div className="checkout-button" onClick={checkoutHandler}>
                 CHECKOUT

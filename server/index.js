@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import config from "./config";
 import userRoute from "./routes/userRoute";
 import productRouter from "./routes/productRoute";
+import orderRouter from "./routes/orderRoute";
 const app = express();
 
 const mongodbUrl = config.MONGODB_URL;
@@ -20,6 +21,7 @@ mongoose
 app.use(bodyParser.json());
 app.use("/api/users", userRoute);
 app.use("/api/products", productRouter);
+app.use("/api/orders", orderRouter);
 
 app.listen(5000, () => {
   console.log("Server up on port 5000");

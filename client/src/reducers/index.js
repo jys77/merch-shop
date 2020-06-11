@@ -4,6 +4,7 @@ import { productDetailReducer } from "./productDetailReducer";
 import { cartReducer } from "./cartReducer";
 import { signInReducer, registerReducer } from "./userReducer";
 import { categoryReducer } from "./categoryReducer";
+import { orderCreateReducer } from "./orderReducer";
 export {
   productListReducer,
   sidebarToggleReducer,
@@ -12,4 +13,5 @@ export {
   signInReducer,
   registerReducer,
   categoryReducer,
+  orderCreateReducer,
 };
