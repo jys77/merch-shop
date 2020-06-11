@@ -9,6 +9,27 @@ router.get("/", isAuth, async (req, res) => {
   res.send(orders);
 });
 
+router.get("/:id", isAuth, async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    res.send(order);
+  } else {
+    res.status(404).send("Order not found.");
+  }
+});
+
+router.put("/:id/pay", isAuth, async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    const updatedOrder = await order.save();
+    res.send({ msg: "Order Paid", order: updatedOrder });
+  } else {
+    res.status(404).send({ msg: "Order not found." });
+  }
+});
+
 router.get("/mine", isAuth, async (req, res) => {
   const orders = await Order.find({ user: req.user._id });
   res.send(orders);
@@ -19,7 +40,7 @@ router.post("/", isAuth, async (req, res) => {
     orderItems: req.body.orderItems,
     user: req.user._id,
     shipping: req.body.shipping,
-    paymentMethod: req.body.paymentMethod,
+    payment: req.body.payment,
     itemsPrice: req.body.itemsPrice,
     shippingPrice: req.body.shippingPrice,
     totalPrice: req.body.totalPrice,

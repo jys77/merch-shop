@@ -15,6 +15,10 @@ const shippingSchema = {
   },
 };
 
+const paymentSchema = {
+  paymentMethod: { type: String, required: true },
+};
+
 const orderItemsSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -48,7 +52,7 @@ const orderSchema = new mongoose.Schema(
     },
     orderItems: [orderItemsSchema],
     shipping: shippingSchema,
-    paymentMethod: { type: String, required: true },
+    payment: paymentSchema,
     itemsPrice: { type: Number },
     shippingPrice: { type: Number },
     totalPrice: { type: Number },

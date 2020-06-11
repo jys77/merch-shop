@@ -152,9 +152,7 @@ export const Payment = (props) => {
       product: x._id,
     };
   });
-  const { loading, success, error, order } = useSelector(
-    (state) => state.orderCreate
-  );
+  const { success, order } = useSelector((state) => state.orderCreate);
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -162,7 +160,7 @@ export const Payment = (props) => {
       createOrder({
         orderItems,
         shipping,
-        paymentMethod,
+        payment: { paymentMethod },
         itemsPrice,
         shippingPrice,
         totalPrice,
@@ -174,7 +172,7 @@ export const Payment = (props) => {
     if (success) {
       props.history.push("/order/" + order._id);
     }
-  }, [success]);
+  }, [success, order._id, props.history]);
 
   const address = shipping.fullAddress ? shipping.fullAddress.split(", ") : "";
   let firstLine = "";
