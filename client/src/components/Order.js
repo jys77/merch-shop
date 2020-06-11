@@ -147,7 +147,7 @@ export const Order = (props) => {
     } else {
       dispatch(detailsOrder(props.match.params.id));
     }
-  }, [successPay, dispatch, props.history, props.match.params.id]);
+  }, [successPay]);
 
   const address = order.shipping.fullAddress
     ? order.shipping.fullAddress.split(", ")

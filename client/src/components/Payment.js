@@ -172,7 +172,7 @@ export const Payment = (props) => {
     if (success) {
       props.history.push("/order/" + order._id);
     }
-  }, [success, order._id, props.history]);
+  }, [success]);
 
   const address = shipping.fullAddress ? shipping.fullAddress.split(", ") : "";
   let firstLine = "";
