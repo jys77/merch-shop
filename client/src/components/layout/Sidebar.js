@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Cookie from "js-cookie";
 import { toggleSidebar, fetchCategories } from "../../actions";
+import { logout } from "../../actions";
 
 const SidebarWrapper = styled.div`
   .sidebar-overlay {
@@ -18,6 +20,7 @@ const SidebarWrapper = styled.div`
     }
   }
   .sidebar-menu {
+    z-index: 1000;
     @media (min-width: 768px) {
       display: none;
     }
@@ -60,6 +63,16 @@ const SidebarWrapper = styled.div`
         }
       }
     }
+    .log-out {
+      position: absolute;
+      bottom: 6rem;
+      a {
+        text-decoration: none;
+        color: black;
+        font-size: 1.2rem;
+        font-family: "Roboto", sans-serif;
+      }
+    }
   }
 `;
 
@@ -83,6 +96,10 @@ export const Sidebar = () => {
     dispatchCategories(fetchCategories());
   }, [dispatchCategories]);
 
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
+
   return (
     <SidebarWrapper>
       <div
@@ -92,11 +109,11 @@ export const Sidebar = () => {
       <div className={sidebarClasses.join(" ")}>
         <div className="sidebar-container">
           <Link
-            to="/signin"
+            to={Cookie.getJSON("userInfo") ? "/profile" : "/signin"}
             className="log-in-or-sign-in"
             onClick={() => dispatch(toggleSidebar())}
           >
-            Log in / Sign in
+            {Cookie.getJSON("userInfo") ? "My Account" : "Log in / Sign in"}
           </Link>
           <ul>
             <li>
@@ -114,6 +131,17 @@ export const Sidebar = () => {
                 ))
               : null}
           </ul>
+          {Cookie.getJSON("userInfo") ? (
+            <div
+              className="log-out"
+              onClick={() => {
+                logoutHandler();
+                dispatch(toggleSidebar());
+              }}
+            >
+              <Link to="/">Log Out</Link>
+            </div>
+          ) : null}
         </div>
       </div>
     </SidebarWrapper>

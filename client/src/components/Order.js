@@ -6,7 +6,7 @@ import { detailsOrder, payOrder } from "../actions";
 import { PayPalButton } from "./PayPalButton";
 const OrderWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 2rem;
   .order-header {
     font-size: 0.9rem;
@@ -143,7 +143,7 @@ export const Order = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (successPay) {
-      props.history.push("/profile");
+      props.history.push("/profile/orders");
     } else {
       dispatch(detailsOrder(props.match.params.id));
     }
