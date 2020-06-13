@@ -10,6 +10,7 @@ import { Register } from "../Register";
 import { Shipping } from "../Shipping";
 import { Payment } from "../Payment";
 import { Order } from "../Order";
+import { Profile } from "../Profile";
 
 const ContentWrapper = styled.main`
   max-width: 1440px;
@@ -35,6 +36,7 @@ export const Content = () => {
       <Route path="/shipping" component={Shipping} />
       <Route path="/payment" component={Payment} />
       <Route path="/order/:id" component={Order} />
+      <Route path="/profile" component={Profile} />
     </ContentWrapper>
   );
 };

@@ -155,7 +155,7 @@ export const Product = (props) => {
           <span>
             <Link to="/">Home</Link>
           </span>
-          <span> >> </span>
+          <span> &gt;&gt; </span>
           <span>
             <Link to={"/category/" + product.category}>{product.category}</Link>
           </span>

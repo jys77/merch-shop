@@ -28,6 +28,11 @@ export {
   registerSuccess,
   registerFail,
   register,
+  logout,
+  updateRequest,
+  updateSuccess,
+  updateFail,
+  update,
 } from "./userActions";
 
 export {

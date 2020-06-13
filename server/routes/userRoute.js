@@ -1,6 +1,6 @@
 import express from "express";
 import User from "../models/User";
-import { getToken } from "../utils";
+import { getToken, isAuth } from "../utils";
 
 const router = express.Router();
 
@@ -49,6 +49,37 @@ router.post("/register", async (req, res) => {
     } else {
       res.status(401).send({ msg: "Invalid register information." });
     }
+  }
+});
+
+router.put("/:id", isAuth, async (req, res) => {
+  const userId = req.params.id;
+  const user = await User.findById(userId);
+  if (user) {
+    user.fname = req.body.fname || user.fname;
+    user.lname = req.body.lname || user.lname;
+    if (req.body.oldPassword || req.body.newPassword) {
+      if (req.body.oldPassword && !req.body.newPassword) {
+        res.status(401).send({ msg: "Please set the new password!" });
+      } else if (!req.body.oldPassword && req.body.newPassword) {
+        res.status(401).send({ msg: "Please enter the old password!" });
+      } else if (req.body.oldPassword === req.body.newPassword) {
+        res.status(401).send({ msg: "Please set a different password!" });
+      } else if (req.body.oldPassword !== user.password) {
+        res.status(401).send({ msg: "The old password is wrong!" });
+      } else if (req.body.oldPassword !== req.body.newPassword) {
+        user.password = req.body.newPassword || user.password;
+      }
+    }
+    const updatedUser = await user.save();
+    res.send({
+      _id: updatedUser._id,
+      fname: updatedUser.fname,
+      lname: updatedUser.lname,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: getToken(updatedUser),
+    });
   }
 });
 

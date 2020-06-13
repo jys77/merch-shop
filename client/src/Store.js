@@ -13,6 +13,7 @@ import {
   orderCreateReducer,
   orderDetailsReducer,
   orderPayReducer,
+  userUpdateReducer,
 } from "./reducers";
 
 const cartItems = Cookie.getJSON("cartItems") || [];
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
+  userUpdate: userUpdateReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

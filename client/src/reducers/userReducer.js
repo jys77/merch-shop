@@ -5,6 +5,10 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  LOG_OUT,
+  UPDATE_REQUEST,
+  UPDATE_SUCCESS,
+  UPDATE_FAIL,
 } from "../constants";
 
 export const signInReducer = (state = {}, action) => {
@@ -23,6 +27,8 @@ export const signInReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    case LOG_OUT:
+      return {};
     default:
       return state;
   }
@@ -42,6 +48,29 @@ export const registerReducer = (state = {}, action) => {
     case REGISTER_FAIL:
       return {
         loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const userUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_REQUEST:
+      return {
+        loading: true,
+      };
+    case UPDATE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        userInfo: action.payload,
+      };
+    case UPDATE_FAIL:
+      return {
+        loading: false,
+        success: false,
         error: action.payload,
       };
     default:
