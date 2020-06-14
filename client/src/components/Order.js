@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import moment from "moment";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailsOrder, payOrder } from "../actions";
@@ -178,7 +179,13 @@ export const Order = (props) => {
       ) : (
         <div>
           <div className="order-header">
-            Order Number: <strong>{props.match.params.id}</strong>
+            Order ID: <strong>{props.match.params.id}</strong>
+          </div>
+          <div className="order-header">
+            Order Time:{" "}
+            <strong>
+              {moment(order.createdAt).format("YYYY/MM/DD HH:MM:SS")}
+            </strong>
           </div>
           <div className="order-container">
             <div className="order-left">
@@ -197,7 +204,10 @@ export const Order = (props) => {
                   <div>{order.payment.paymentMethod}</div>
                   <div>
                     Status:{" "}
-                    {order.isPaid ? "Paid at " + order.paidAt : "Not Paid"}
+                    {order.isPaid
+                      ? "Paid at " +
+                        moment(order.paidAt).format("YYYY/MM/DD HH:MM:SS")
+                      : "Not Paid"}
                   </div>
                 </div>
               </div>

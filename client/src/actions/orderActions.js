@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Cookie from "js-cookie";
 import {
   ORDER_REQUEST,
   ORDER_SUCCESS,
@@ -10,6 +10,9 @@ import {
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
   ORDER_PAY_FAIL,
+  MY_ORDERS_REQUEST,
+  MY_ORDERS_SUCCESS,
+  MY_ORDERS_FAIL,
 } from "../constants";
 
 export const orderRequest = (data) => {
@@ -140,5 +143,48 @@ export const payOrder = (id) => {
         dispatch(orderPayFail(data));
       }
     }
+  };
+};
+
+export const myOrdersRequest = () => {
+  return {
+    type: MY_ORDERS_REQUEST,
+  };
+};
+
+export const myOrdersSuccess = (data) => {
+  return {
+    type: MY_ORDERS_SUCCESS,
+    payload: data,
+  };
+};
+
+export const myOrdersFail = (error) => {
+  return {
+    type: MY_ORDERS_FAIL,
+    payload: error,
+  };
+};
+
+export const myOrders = () => {
+  return (dispatch) => {
+    dispatch(myOrdersRequest());
+    const userInfo = Cookie.getJSON("userInfo");
+    axios
+      .get("/api/orders/mine/orders", {
+        headers: {
+          Authorization: "Bearer " + userInfo.token,
+        },
+      })
+      .then((res) => {
+        const data = res.data;
+        dispatch(myOrdersSuccess(data));
+      })
+      .catch((error) => {
+        if (error.response) {
+          const { data } = error.response;
+          dispatch(myOrdersFail(data));
+        }
+      });
   };
 };
