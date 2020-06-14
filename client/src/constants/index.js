@@ -21,6 +21,7 @@ export const ADD_TO_CART_FAIL = "ADD_TO_CART_FAIL";
 export const CART_NUM_CHANGE = "CART_NUM_CHANGE";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const SAVE_SHIPPING = "SAVE_SHIPPING";
+export const CLEAN_CART = "CLEAN_CART";
 
 //User Constants
 export const SIGN_IN_REQUEST = "SIGN_IN_REQUEST";

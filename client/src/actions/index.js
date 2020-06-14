@@ -17,6 +17,7 @@ export {
   cartNumChange,
   removeFromCart,
   saveShipping,
+  cleanCart,
 } from "./cartActions";
 
 export {

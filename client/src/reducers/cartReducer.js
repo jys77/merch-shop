@@ -4,6 +4,7 @@ import {
   CART_NUM_CHANGE,
   REMOVE_FROM_CART,
   SAVE_SHIPPING,
+  CLEAN_CART,
 } from "../constants";
 
 const initialState = {
@@ -60,6 +61,11 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: updatedCartItems,
+      };
+    case CLEAN_CART:
+      return {
+        ...state,
+        cartItems: [],
       };
     case SAVE_SHIPPING:
       return {

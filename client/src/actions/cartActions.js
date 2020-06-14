@@ -7,6 +7,7 @@ import {
   CART_NUM_CHANGE,
   REMOVE_FROM_CART,
   SAVE_SHIPPING,
+  CLEAN_CART,
 } from "../constants";
 
 export const addToCartSuccess = (product, qty) => {
@@ -88,6 +89,15 @@ export const removeFromCart = (productId) => {
       cart: { cartItems },
     } = getState();
     Cookie.set("cartItems", JSON.stringify(cartItems));
+  };
+};
+
+export const cleanCart = () => {
+  return (dispatch) => {
+    Cookie.set("cartItems", []);
+    dispatch({
+      type: CLEAN_CART,
+    });
   };
 };
 

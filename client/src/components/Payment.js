@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { createOrder } from "../actions";
+import { createOrder, cleanCart } from "../actions";
 const PaymentWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -156,6 +156,7 @@ export const Payment = (props) => {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(cleanCart());
     dispatch(
       createOrder({
         orderItems,
