@@ -113,7 +113,7 @@ export const Header = () => {
           ☰
         </div>
         <div className="logo">
-          <Link to="/">Merch</Link>
+          <Link to="/">Merch Shop</Link>
         </div>
         <div className="right-section">
           <Link to={userInfo ? "/profile" : "/signin"} className="account">

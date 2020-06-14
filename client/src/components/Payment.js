@@ -156,7 +156,6 @@ export const Payment = (props) => {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(cleanCart());
     dispatch(
       createOrder({
         orderItems,
@@ -167,6 +166,7 @@ export const Payment = (props) => {
         totalPrice,
       })
     );
+    dispatch(cleanCart());
   };
 
   useEffect(() => {

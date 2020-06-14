@@ -184,7 +184,7 @@ export const Order = (props) => {
           <div className="order-header">
             Order Time:{" "}
             <strong>
-              {moment(order.createdAt).format("YYYY/MM/DD HH:MM:SS")}
+              {moment(order.createdAt).format("YYYY/MM/DD HH:mm:ss")}
             </strong>
           </div>
           <div className="order-container">
@@ -206,7 +206,7 @@ export const Order = (props) => {
                     Status:{" "}
                     {order.isPaid
                       ? "Paid at " +
-                        moment(order.paidAt).format("YYYY/MM/DD HH:MM:SS")
+                        moment(order.paidAt).format("YYYY/MM/DD HH:mm:ss")
                       : "Not Paid"}
                   </div>
                 </div>

@@ -120,11 +120,11 @@ export const OrderList = () => {
                     <div className="order-info">
                       Order Time:{" "}
                       <strong>
-                        {moment(order.createdAt).format("YYYY/MM/DD HH:MM:SS")}
+                        {moment(order.createdAt).format("YYYY/MM/DD HH:mm:ss")}
                       </strong>
                     </div>
                     {order.orderItems.map((item) => (
-                      <div key={item._id} className="item">
+                      <div key={(order._id, item._id)} className="item">
                         <div className="image">
                           <img src={item.image} alt={item.name} />
                         </div>
@@ -143,7 +143,7 @@ export const OrderList = () => {
                     >
                       {order.isPaid
                         ? "Paid at " +
-                          moment(order.paidAt).format("YYYY/MM/DD HH:MM:SS")
+                          moment(order.paidAt).format("YYYY/MM/DD HH:mm:ss")
                         : "Not Paid"}
                     </div>
                     <div className="total-price">

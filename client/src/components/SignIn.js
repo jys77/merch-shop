@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Cookie from "js-cookie";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signIn } from "../actions";
@@ -101,7 +102,10 @@ export const SignIn = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { loading, userInfo, error } = useSelector((state) => state.signIn);
+  const { loading, error } = useSelector((state) => state.signIn);
+  const userInfo = Cookie.getJSON("userInfo")
+    ? Cookie.getJSON("userInfo")
+    : null;
   const redirect = props.location.search
     ? props.location.search.split("=")[1]
     : "/";

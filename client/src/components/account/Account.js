@@ -85,9 +85,9 @@ export const Account = (props) => {
   const userInfo = Cookie.getJSON("userInfo");
   const [firstName, setFirstName] = useState(`${userInfo.fname}`);
   const [lastName, setLastName] = useState(`${userInfo.lname}`);
-  const [oldPassword, setOldPassword] = useState(null);
-  const [newPassword, setNewPassword] = useState(null);
-  const [newPassword2, setNewPassword2] = useState(null);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPassword2, setNewPassword2] = useState("");
 
   const updateNameHandler = (e) => {
     e.preventDefault();
@@ -107,6 +107,9 @@ export const Account = (props) => {
           newPassword: newPassword,
         })
       );
+      setOldPassword("");
+      setNewPassword("");
+      setNewPassword2("");
     }
   };
 
@@ -148,6 +151,7 @@ export const Account = (props) => {
               id="oldPassword"
               type="password"
               onChange={(e) => setOldPassword(e.target.value)}
+              autoComplete="on"
             />
           </div>
           <div className="fill-box">
@@ -158,6 +162,7 @@ export const Account = (props) => {
               id="newPassword"
               type="password"
               onChange={(e) => setNewPassword(e.target.value)}
+              autoComplete="on"
             />
           </div>
           <div className="fill-box">
@@ -168,6 +173,7 @@ export const Account = (props) => {
               id="newPassword2"
               type="password"
               onChange={(e) => setNewPassword2(e.target.value)}
+              autoComplete="on"
             />
           </div>
         </div>
