@@ -31,7 +31,9 @@ router.put("/:id/pay", isAuth, async (req, res) => {
 });
 
 router.get("/mine/orders", isAuth, async (req, res) => {
-  const orders = await Order.find({ user: req.user._id });
+  const orders = await Order.find({ user: req.user._id }).sort({
+    createdAt: -1,
+  });
   res.send(orders);
 });
 
