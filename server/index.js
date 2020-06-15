@@ -25,6 +25,6 @@ app.get("/api/config/paypal", (req, res) => {
   res.send(config.PAYPAL_CLIENT_ID);
 });
 
-app.listen(5000, () => {
-  console.log("Server up on port 5000");
+app.listen(config.PORT, () => {
+  console.log(`Server is up on port ${config.PORT}.`);
 });
