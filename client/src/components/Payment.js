@@ -166,7 +166,9 @@ export const Payment = (props) => {
         totalPrice,
       })
     );
-    dispatch(cleanCart());
+    if (success) {
+      dispatch(cleanCart());
+    }
   };
 
   useEffect(() => {
