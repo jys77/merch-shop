@@ -41,8 +41,12 @@ export const createOrder = (order) => {
     try {
       dispatch(orderRequest(order));
       const {
-        signIn: { userInfo },
+        signIn: { userInfo: userInfoSignIn },
       } = getState();
+      const {
+        register: { userInfo: userInfoRegister },
+      } = getState();
+      const userInfo = userInfoSignIn || userInfoRegister;
       const {
         data: { data: newOrder },
       } = await axios.post("/api/orders", order, {
@@ -86,8 +90,12 @@ export const detailsOrder = (orderId) => {
     try {
       dispatch(orderDetailRequest(orderId));
       const {
-        signIn: { userInfo },
+        signIn: { userInfo: userInfoSignIn },
       } = getState();
+      const {
+        register: { userInfo: userInfoRegister },
+      } = getState();
+      const userInfo = userInfoSignIn || userInfoRegister;
       const { data } = await axios.get("/api/orders/" + orderId, {
         headers: {
           Authorization: "Bearer " + userInfo.token,

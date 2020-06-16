@@ -166,13 +166,11 @@ export const Payment = (props) => {
         totalPrice,
       })
     );
-    if (success) {
-      dispatch(cleanCart());
-    }
   };
 
   useEffect(() => {
     if (success) {
+      dispatch(cleanCart());
       props.history.push("/order/" + order._id);
     }
   }, [success]);
