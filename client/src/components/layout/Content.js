@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { Home } from "../Home";
 import { Product } from "../Product";
@@ -11,6 +11,7 @@ import { Shipping } from "../Shipping";
 import { Payment } from "../Payment";
 import { Order } from "../Order";
 import { Profile } from "../Profile";
+import { NotFound } from "../NotFound";
 
 const ContentWrapper = styled.main`
   max-width: 1440px;
@@ -27,16 +28,19 @@ export const Content = () => {
   return (
     <ContentWrapper>
       <Sidebar />
-      <Route path="/" exact component={Home} />
-      <Route path="/category/:category" component={Home} />
-      <Route path="/product/:id" component={Product} />
-      <Route path="/cart/:id?" component={Cart} />
-      <Route path="/signin" component={SignIn} />
-      <Route path="/register" component={Register} />
-      <Route path="/shipping" component={Shipping} />
-      <Route path="/payment" component={Payment} />
-      <Route path="/order/:id" component={Order} />
-      <Route path="/profile" component={Profile} />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/category/:category" component={Home} />
+        <Route path="/product/:id" component={Product} />
+        <Route path="/cart/:id?" component={Cart} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/register" component={Register} />
+        <Route path="/shipping" component={Shipping} />
+        <Route path="/payment" component={Payment} />
+        <Route path="/order/:id" component={Order} />
+        <Route path="/profile" component={Profile} />
+        <Route path="*" component={NotFound} />
+      </Switch>
     </ContentWrapper>
   );
 };
