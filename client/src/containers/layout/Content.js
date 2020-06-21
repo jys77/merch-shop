@@ -11,7 +11,7 @@ import { Shipping } from "../Shipping";
 import { Payment } from "../Payment";
 import { Order } from "../Order";
 import { Profile } from "../Profile";
-import { NotFound } from "../NotFound";
+import { NotFound } from "../../components/NotFound";
 
 const ContentWrapper = styled.main`
   max-width: 1440px;

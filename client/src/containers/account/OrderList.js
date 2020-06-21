@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { myOrders } from "../../actions";
+import { Loader } from "../../components/Loader";
 
 const OrderListWrapper = styled.div`
   width: 100%;
@@ -102,7 +103,7 @@ export const OrderList = () => {
     <OrderListWrapper>
       <div className="orders-header">My Orders</div>
       {loading ? (
-        <div className="loader"></div>
+        <Loader />
       ) : error ? (
         <div className="tip">{error.msg}</div>
       ) : orders.length <= 0 ? (

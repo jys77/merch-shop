@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductList, fetchCategories } from "../actions";
+import { Loader } from "../components/Loader";
 const HomeWrapper = styled.main`
   display: flex;
   .sidebar {
@@ -130,7 +131,7 @@ export const Home = (props) => {
         </ul>
       </div>
       {loading ? (
-        <div className="loader" />
+        <Loader />
       ) : error ? (
         { error }
       ) : (

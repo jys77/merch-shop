@@ -4,7 +4,8 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailsOrder, payOrder } from "../actions";
-import { PayPalButton } from "./PayPalButton";
+import { PayPalButton } from "../components/PayPalButton";
+import { Loader } from "../components/Loader";
 const OrderWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -173,7 +174,7 @@ export const Order = (props) => {
   return (
     <OrderWrapper>
       {loading ? (
-        <div className="loader" />
+        <Loader />
       ) : error ? (
         <div>{error.msg}</div>
       ) : (

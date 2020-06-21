@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { fetchProductDetail } from "../actions";
 import { Link } from "react-router-dom";
+import { Loader } from "../components/Loader";
 
 const ProductWrapper = styled.div`
   height: 100%;
@@ -145,7 +146,7 @@ export const Product = (props) => {
     return () => {};
   }, [dispatch, props.match.params.id]);
   return loading ? (
-    <div className="loader" />
+    <Loader />
   ) : error ? (
     { error }
   ) : (
