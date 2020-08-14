@@ -219,7 +219,9 @@ export const Cart = (props) => {
   };
 
   useEffect(() => {
-    dispatch(addToCart(productId, qty));
+    if (productId) {
+      dispatch(addToCart(productId, qty));
+    }
   }, [dispatch, productId, qty]);
 
   return (
