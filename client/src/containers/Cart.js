@@ -150,10 +150,6 @@ const CartWrapper = styled.div`
           justify-content: space-between;
           padding-bottom: 1rem;
           border-bottom: 1px #f1f5f8 solid;
-          &-text {
-          }
-          &-num {
-          }
         }
         .shipping {
           display: flex;
@@ -161,10 +157,6 @@ const CartWrapper = styled.div`
           padding-top: 1rem;
           padding-bottom: 1rem;
           border-bottom: 1px #f1f5f8 solid;
-          &-text {
-          }
-          &-num {
-          }
         }
         .total {
           display: flex;
@@ -173,10 +165,6 @@ const CartWrapper = styled.div`
           padding-top: 1rem;
           padding-bottom: 1rem;
           border-bottom: 1px #f1f5f8 solid;
-          &-text {
-          }
-          &-num {
-          }
         }
         .checkout-button {
           cursor: pointer;
