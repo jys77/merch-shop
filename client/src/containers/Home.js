@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductList, fetchCategories } from "../actions";
 import { Loader } from "../components/Loader";
+import LazyLoad from "react-lazyload";
+
 const HomeWrapper = styled.main`
   display: flex;
   .sidebar {
@@ -50,7 +52,7 @@ const HomeWrapper = styled.main`
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      li {
+      .lazyload-wrapper {
         @media (min-width: 768px) {
           width: 33.33333%;
         }
@@ -138,15 +140,23 @@ export const Home = (props) => {
         <div className="products">
           <ul className="products-list">
             {products.map((product) => (
-              <li key={product._id}>
-                <Link to={"/product/" + product._id}>
-                  <div className="image">
-                    <img alt={product.name} src={product.image} />
-                  </div>
-                  <h3 className="name">{product.name}</h3>
-                  <h2 className="price">${product.price}</h2>
-                </Link>
-              </li>
+              <LazyLoad
+                key={product._id}
+                once={true}
+                height="100%"
+                offset={[-200, 0]}
+                placeholder={<Loader />}
+              >
+                <li>
+                  <Link to={"/product/" + product._id}>
+                    <div className="image">
+                      <img alt={product.name} src={product.image} />
+                    </div>
+                    <h3 className="name">{product.name}</h3>
+                    <h2 className="price">${product.price}</h2>
+                  </Link>
+                </li>
+              </LazyLoad>
             ))}
           </ul>
         </div>
