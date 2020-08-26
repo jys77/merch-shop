@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShipping } from "../actions";
+import { countryList } from "../constants";
 
 const ShippingWrapper = styled.div`
   width: 100%;
@@ -148,57 +149,6 @@ const ShippingWrapper = styled.div`
     }
   }
 `;
-
-const countryList = [
-  "Australia",
-  "Austria",
-  "Belgium",
-  "Bulgaria",
-  "Canada",
-  "China (Mainland)",
-  "Costa Rica",
-  "Croatia",
-  "Czech Republic",
-  "Denmark",
-  "Estonia",
-  "Finland",
-  "France",
-  "Germany",
-  "Greece",
-  "Hong Kong, China",
-  "Hungary",
-  "Iceland",
-  "Ireland",
-  "Israel",
-  "Italy",
-  "Japan",
-  "Latvia",
-  "Liechtenstein",
-  "Lithuania",
-  "Luxembourg",
-  "Malta",
-  "Monaco",
-  "Morocco",
-  "Netherlands",
-  "New Zealand",
-  "Norway",
-  "Poland",
-  "Portugal",
-  "Romania",
-  "Singapore",
-  "Slovakia",
-  "Slovenia",
-  "South Africa",
-  "South Korea",
-  "Spain",
-  "Sweden",
-  "Switzerland",
-  "Turkey",
-  "Taiwan, China",
-  "United Arab Emirates",
-  "United Kingdom",
-  "United States",
-];
 
 export const Shipping = (props) => {
   const [email, setEmail] = useState(null);
