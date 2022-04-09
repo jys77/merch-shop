@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "js-cookie": "^2.2.1",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-lazyload": "^3.0.0",
